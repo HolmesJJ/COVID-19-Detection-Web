@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/radio.css">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-t-85 p-b-20">
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title p-b-70">
+                        Welcome
+                    </span>
+                    <span class="login100-form-avatar">
+                        <img src="images/logo.png" alt="logo">
+                    </span>
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter username">
+                        <input class="input100" type="text" name="username">
+                        <span class="focus-input100" data-placeholder="Username"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-35" data-validate="Enter password">
+                        <input class="input100" type="password" name="pass">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+                    <div class="validate-input m-b-50">
+                        <div class="container-radio">
+                            <div class="radio">
+                                <input id="r1" type="radio" name="radio" value="detect" checked>
+                                <label for="r1">Detect</label>
+                            </div>
+                            <div class="radio">
+                                <input id="r2" type="radio" name="radio" value="label">
+                                <label for="r2">Label</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Login
+                        </button>
+                    </div>
+                    <p class="login100-form-message"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-loader">
+        <div class="loader"></div>
+    </div>
+    <div class="container-face-recognition">
+        <div class="face-recognition">
+            <span class="close">&times;</span>
+            <!-- fps_meter -->
+            <div>
+                <div class="container-time">
+                    <label for="time">Time:</label>
+                    <input disabled value="-" id="time" type="text">
+                </div>
+                <div class="container-fps">
+                    <label for="fps">Estimated Fps:</label>
+                    <input disabled value="-" id="fps" type="text">
+                </div>
+
+            </div>
+            <!-- fps_meter -->
+            <div style="position: relative">
+                <div class="container-webcam">
+                    <video class="webcam" autoplay muted></video>
+                </div>
+                <div class="container-canvas">
+                    <canvas class="canvas" />
+                </div>
+            </div>
+            <div>
+                <canvas class="screenshot" />
+            </div>
+            <p class="message"></p>
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="js/face/face-api.js"></script>
+    <script type="text/javascript" src="js/face/face-detection-controls.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/login.js"></script>
+</body>
+
+</html>

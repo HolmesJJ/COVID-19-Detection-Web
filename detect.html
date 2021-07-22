@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Detect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/detect.css">
+    <link rel="stylesheet" type="text/css" href="css/upload.css">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+    <button class="logout">Logout ></button>
+    <h2 class="title">Dicom File Upload & Preview</h2>
+    <!-- Upload -->
+    <form id="file-upload-form" class="uploader">
+        <input id="file-upload" type="file" name="detect" accept="*/dicom, .dcm, image/dcm, */dcm, .dicom" />
+        <label for="file-upload" id="file-drag">
+            <div id="start">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <div>Select a file or drag here</div>
+                <div id="notdicom" class="hidden">Please select an dicom file</div>
+                <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+            </div>
+            <div id="response" class="hidden">
+                <div id="messages"></div>
+                <progress class="progress fail" id="file-progress" value="0">
+                    <span>0</span>%
+                </progress>
+            </div>
+        </label>
+    </form>
+    <div class="container-result">
+        <div class="result">
+            <span class="close">&times;</span>
+            <img class="image" src="images/radiography.png">
+            <p class="message"></p>
+        </div>
+    </div>
+    <div class="container-popup">
+        <div class="popup">
+            <span class="close">&times;</span>
+            <p class="message"></p>
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/detect.js"></script>
+</body>
+
+</html>

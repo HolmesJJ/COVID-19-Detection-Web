@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Label</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/label.css">
+</head>
+
+<body>
+    <button class="logout">Logout ></button>
+    <h2 class="title">Radiography Labelling</h2>
+    <div class="container-radiography-canvas">
+        <div class="container-radiography">
+            <img class="radiography" src="images/radiography.png" alt="Radiography" />
+        </div>
+        <div class="container-canvas">
+            <canvas class="canvas" />
+        </div>
+    </div>
+    <div class="container-control-btn">
+        <button class="control-btn previous-btn">
+            Previous
+        </button>
+        <button class="control-btn confirm-btn">
+            Confirm
+        </button>
+        <button class="control-btn undo-btn">
+            Undo
+        </button>
+        <button class="control-btn next-btn">
+            Next
+        </button>
+    </div>
+    <div class="container-loader">
+        <div class="loader"></div>
+    </div>
+    <div class="container-popup">
+        <div class="popup">
+            <span class="close">&times;</span>
+            <p class="message"></p>
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/label.js"></script>
+</body>
+
+</html>
