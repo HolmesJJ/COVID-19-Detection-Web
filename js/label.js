@@ -170,7 +170,7 @@
         loader.show();
 
         const request = $.ajax({
-            url: 'http://localhost:8000/' + control + '?id=' + id,
+            url: 'https://2a9e90d40a74.ngrok.io/' + control + '?id=' + id,
             type: 'get',
         });
 
@@ -183,7 +183,7 @@
             if (result.code == 0) {
                 if (result.id != -1) {
                     currentId = result.id;
-                    radiography.attr('src', 'http://localhost:8000/show/' + currentId + '.png');
+                    radiography.attr('src', 'https://2a9e90d40a74.ngrok.io/show/' + currentId + '.png');
                 } else {
                     if (control == 'previous') {
                         if (init) {
@@ -234,7 +234,7 @@
         }
 
         const request = $.ajax({
-            url: 'http://localhost:8000/draw',
+            url: 'https://2a9e90d40a74.ngrok.io/draw',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify(data),
@@ -249,7 +249,7 @@
             if (result.code == 0) {
                 if (result.id != -2) {
                     currentId = result.id;
-                    radiography.attr('src', 'http://localhost:8000/show/' + currentId + '.png');
+                    radiography.attr('src', 'https://2a9e90d40a74.ngrok.io/show/' + currentId + '.png');
                 } else {
                     radiography.attr('src', '../images/radiography.png');
                     disableBtn();

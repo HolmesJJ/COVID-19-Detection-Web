@@ -84,7 +84,7 @@
                             const result = JSON.parse(xhr.responseText);
                             console.log(result);
                             if (result.code == 0) {
-                                showResut(true, 'http://localhost:8000/show/' + result.id + '.png', 'indeterminate');
+                                showResut(true, 'https://2a9e90d40a74.ngrok.io/show/' + result.id + '.png', 'indeterminate');
                             } else {
                                 popup(true, 'Detect failed. Please upload again.');
                                 document.location.reload(true);
@@ -100,7 +100,7 @@
                 data.append('detect', file);
 
                 // Start upload
-                xhr.open('POST', 'http://localhost:8000/detect', true);
+                xhr.open('POST', 'https://2a9e90d40a74.ngrok.io/detect', true);
                 xhr.send(data);
             } else {
                 output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
