@@ -1,9 +1,24 @@
 (function ($) {
     "use strict";
-    
-    if (!checkCookie()) {
-        window.location.href = "index.html";
-    }
+
+        if (!checkCookie()) {
+            window.location.href = "index.html";
+        }
+
+    const radiography = $('.container-radiography .radiography');
+    const containerCanvas = $('.container-canvas');
+    const canvas = document.querySelector(".container-canvas .canvas");
+    const slider = $('.container-result .container-slide .slider');
+    const slideValue = $('.container-result .container-slide .slide-value');
+    slideValue.text(slider.val() + '%');
+
+    const ctx = canvas.getContext("2d");
+
+    const boxes256 = new Array();
+    const labels = new Array();
+    const scores = new Array();
+    const labelTexts = ['negative', 'typical', 'indeterminate', 'atypical'];
+    const originalImageSize = new Array(0, 0);
 
     // Check for the various File API support.
     if (window.File && window.FileList && window.FileReader) {
@@ -58,8 +73,8 @@
     // Output
     function output(msg) {
         // Response
-        const m = document.getElementById('messages');
-        m.innerHTML = msg;
+        const message = document.getElementById('message');
+        message.innerHTML = msg;
     }
 
     function uploadFile(file) {
@@ -84,7 +99,13 @@
                             const result = JSON.parse(xhr.responseText);
                             console.log(result);
                             if (result.code == 0) {
-                                showResut(true, 'http://localhost:8000/show/' + result.id + '.png', 'indeterminate');
+                                showResut(true, 'http://localhost:8000/show/' + result.id + '.png', message);
+                                console.log('boxes_256: ' + result.boxes_256.length + ', labels: ' + result.labels.length + ', scores: ' + result.scores.length);
+                                for (let i = 0; i < result.boxes_256.length; i++) {
+                                    boxes256.push(result.boxes_256[i]);
+                                    labels.push(result.labels[i]);
+                                    scores.push(result.scores[i]);
+                                }
                             } else {
                                 popup(true, 'Detect failed. Please upload again.');
                                 document.location.reload(true);
@@ -145,6 +166,69 @@
         }
     }
 
+    function initCanvas() {
+        canvas.offsetwidth = radiography.width();
+        canvas.offsetheight = radiography.height();
+        canvas.width = radiography.width();
+        canvas.height = radiography.height();
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.lineWidth = 3;
+        const showLabels = [];
+        for (let i = 0; i < boxes256.length; i++) {
+            if (scores[i] * 100 >= slider.val()) {
+                const color = getRandomColor();
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                const box256 = boxes256[i];
+                const x1_256 = boxes256[i][0];
+                const y1_256 = boxes256[i][1];
+                const x2_256 = boxes256[i][2];
+                const y2_256 = boxes256[i][3];
+                const x1 = radiography.width() / 256 * x1_256;
+                const y1 = radiography.height() / 256 * y1_256;
+                const x2 = radiography.width() / 256 * x2_256;
+                const y2 = radiography.height() / 256 * y2_256;
+                ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+                ctx.font = "18px Arial";
+                ctx.fillText(labelTexts[labels[i]], x1, y1 - 8);
+                if (showLabels.indexOf(labelTexts[labels[i]]) == -1) {
+                    showLabels.push(labelTexts[labels[i]]);
+                }
+            }
+        }
+        showMessage(showLabels.join(', '));
+    }
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    /*==================================================================
+    [ Radiography ]*/
+    radiography.on("load", function () {
+        clearCanvas();
+        initCanvas();
+        draw();
+        originalImageSize[0] = this.naturalWidth;
+        originalImageSize[1] = this.naturalHeight;
+    }).each(function () {
+        if (this.complete) {
+            $(this).trigger('load')
+        };
+    });
+
     /*==================================================================
     [ Close ]*/
     $('.container-result .result .close').on('click', function (e) {
@@ -155,16 +239,22 @@
     });
 
     /*==================================================================
-    [ Result ]*/
-    function showResut(show, image, message) {
-        $('.container-result .result .message').text(message);
+    [ Image ]*/
+    function showResut(show, image) {
         const result = $('.container-result');
-        $('.container-result .result .image').attr('src', image);
+        radiography.attr('src', image);
         if (show) {
             result.show();
         } else {
             result.hide();
         }
+    }
+
+    /*==================================================================
+    [ Messsage ]*/
+    function showMessage(msg) {
+        const message = $('.container-result .result .message');
+        message.text(msg);
     }
 
     /*==================================================================
@@ -178,5 +268,20 @@
             popup.hide();
         }
     }
+
+    /*==================================================================
+    [ Window ]*/
+    $(window).resize(function () {
+        clearCanvas();
+        initCanvas();
+        draw();
+    });
+
+    /*==================================================================
+    [ Slide ]*/
+    slider.on('input', function () {
+        slideValue.text(slider.val() + '%');
+        draw();
+    });
 
 })(jQuery);

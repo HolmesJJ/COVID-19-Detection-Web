@@ -31,7 +31,7 @@
                 <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
             </div>
             <div id="response" class="hidden">
-                <div id="messages"></div>
+                <div id="message"></div>
                 <progress class="progress fail" id="file-progress" value="0">
                     <span>0</span>%
                 </progress>
@@ -41,8 +41,19 @@
     <div class="container-result">
         <div class="result">
             <span class="close">&times;</span>
-            <img class="image" src="images/radiography.png">
-            <p class="message"></p>
+            <div class="container-radiography-canvas">
+                <div class="container-radiography">
+                    <img class="radiography" src="images/radiography.png" alt="Radiography" />
+                </div>
+                <div class="container-canvas">
+                    <canvas class="canvas" />
+                </div>
+            </div>
+            <div class="container-slide">
+                <input type="range" min="1" max="100" value="30" class="slider">
+                <span class="slide-value"></span>
+            </div>
+            <p class="message">123</p>
         </div>
     </div>
     <div class="container-popup">

@@ -75,6 +75,10 @@
         containerCanvas.show();
         originalImageSize[0] = this.naturalWidth;
         originalImageSize[1] = this.naturalHeight;
+    }).each(function () {
+        if (this.complete) {
+            $(this).trigger('load')
+        };
     });
 
     /*==================================================================
