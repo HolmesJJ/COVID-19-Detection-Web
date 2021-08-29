@@ -1,9 +1,9 @@
 (function ($) {
     "use strict";
 
-        if (!checkCookie()) {
-            window.location.href = "index.html";
-        }
+    if (!checkCookie()) {
+        window.location.href = "index.html";
+    }
 
     const radiography = $('.container-radiography .radiography');
     const containerCanvas = $('.container-canvas');
