@@ -22,7 +22,20 @@
     let endY = 0;
 
     let currentId = 0;
+    let currentClassId = 0;
     control(currentId, 'next', true);
+
+    /*==================================================================
+    [ Select Label ]*/
+    $(".select-label .default-option").click(function () {
+        $(this).parent().toggleClass("active");
+    })
+
+    $(".select-label .select-ul li").click(function () {
+        currentClassId = $(this).val();
+        $(".select-label .default-option li").html($(this).html());
+        $(this).parents(".select-label").removeClass("active");
+    })
 
     /*==================================================================
     [ Previous ]*/
@@ -38,7 +51,7 @@
     $('.confirm-btn').on('click', function (e) {
         e.preventDefault();
         console.log(boxes);
-        confirm(currentId, boxes);
+        confirm(currentId, currentClassId, boxes);
     });
 
     /*==================================================================
@@ -227,13 +240,14 @@
         });
     }
 
-    function confirm(id, boxes) {
+    function confirm(id, classId, boxes) {
 
         const loader = $('.container-loader');
         loader.show();
 
         const data = {
             id: id,
+            class: classId;
             boxes: boxes,
         }
 
