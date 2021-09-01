@@ -247,7 +247,7 @@
 
         const data = {
             id: id,
-            class: classId;
+            class: classId,
             boxes: boxes,
         }
 
