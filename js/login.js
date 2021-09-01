@@ -78,7 +78,7 @@
         }
 
         const request = $.ajax({
-            url: 'http://localhost:8000/login',
+            url: 'https://a74e-180-129-101-226.ngrok.io/login',
             type: 'post',
             dataType: 'json',
             data: JSON.stringify(data),
@@ -166,7 +166,7 @@
     async function startFaceRecognition() {
         // load the models
         if (!isFaceDetectionModelLoaded()) {
-            await getCurrentFaceDetectionNet().load('../weights');
+            await getCurrentFaceDetectionNet().load('../COVID-19-Detection-Web/weights');
         }
 
         // try to access users webcam and stream the images
@@ -247,7 +247,7 @@
             data.append("recognize", face, username + '.png');
 
             // Start upload
-            xhr.open('POST', 'http://localhost:8000/recognize', true);
+            xhr.open('POST', 'https://a74e-180-129-101-226.ngrok.io/recognize', true);
             xhr.send(data);
         }
     }

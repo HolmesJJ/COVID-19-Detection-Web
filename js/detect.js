@@ -99,7 +99,7 @@
                             const result = JSON.parse(xhr.responseText);
                             console.log(result);
                             if (result.code == 0) {
-                                showResut(true, 'http://localhost:8000/show/' + result.id + '.png', message);
+                                showResut(true, 'https://a74e-180-129-101-226.ngrok.io/show/' + result.id + '.png', message);
                                 console.log('boxes_256: ' + result.boxes_256.length + ', labels: ' + result.labels.length + ', scores: ' + result.scores.length);
                                 for (let i = 0; i < result.boxes_256.length; i++) {
                                     boxes256.push(result.boxes_256[i]);
@@ -121,7 +121,7 @@
                 data.append('detect', file);
 
                 // Start upload
-                xhr.open('POST', 'http://localhost:8000/detect', true);
+                xhr.open('POST', 'https://a74e-180-129-101-226.ngrok.io/detect', true);
                 xhr.send(data);
             } else {
                 output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
